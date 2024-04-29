@@ -28,7 +28,10 @@ const FormSchema = z
       .min(1, "Requer senha")
       .min(8, "Requer senha com mínimo de 8 caracteres"),
     confirmPassword: z.string().min(1, "Requer senha"),
-    birthday: z.string().datetime(),
+    birthday: z
+      .string()
+      .refine((value) => !!Date.parse(value))
+      .transform((value) => new Date(value)),
   })
   .refine((data) => data.password === data.confirmPassword, {
     path: ["confirmPassword"],
@@ -41,9 +44,9 @@ const SignUpForm = () => {
     defaultValues: {
       username: "",
       email: "",
-      name: "Teste Form",
+      name: "",
       password: "",
-      birthday: "2000-01-01T00:00:00.000Z",
+      birthday: undefined,
       confirmPassword: "",
     },
   });
@@ -81,9 +84,9 @@ const SignUpForm = () => {
             name="username"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Username</FormLabel>
+                <FormLabel>Apelido</FormLabel>
                 <FormControl>
-                  <Input placeholder="johndoe" {...field} />
+                  <Input placeholder="Jorjão" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -96,7 +99,7 @@ const SignUpForm = () => {
               <FormItem>
                 <FormLabel>Email</FormLabel>
                 <FormControl>
-                  <Input placeholder="mail@example.com" {...field} />
+                  <Input placeholder="email@example.com" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -109,7 +112,28 @@ const SignUpForm = () => {
               <FormItem>
                 <FormLabel>Name</FormLabel>
                 <FormControl>
-                  <Input placeholder="Jao" {...field} />
+                  <Input placeholder="João" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="birthday"
+            render={({ field }) => (
+              <FormItem>
+                <FormControl>
+                  <Input
+                    type="date"
+                    placeholder="Data de nascimento"
+                    {...field}
+                    value={
+                      field.value instanceof Date
+                        ? field.value.toISOString().split("T")[0]
+                        : field.value
+                    }
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
