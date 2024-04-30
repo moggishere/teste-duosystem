@@ -1,6 +1,5 @@
 "use client";
-//TODO remover auth do google, adicionar link para cadastro
-
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import {
   Form,
@@ -15,9 +14,9 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import Link from "next/link";
-import GoogleSignInButton from "../GoogleSignInButton";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import { Toggle } from "../ui/toggle";
 
 const FormSchema = z.object({
   email: z.string().min(1, "Email is required").email("Invalid email"),
@@ -53,6 +52,8 @@ const SignInForm = () => {
     }
   };
 
+  const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(false);
+
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="w-full">
@@ -78,8 +79,8 @@ const SignInForm = () => {
                 <FormLabel>Password</FormLabel>
                 <FormControl>
                   <Input
-                    type="password"
-                    placeholder="Enter your password"
+                    type={isPasswordVisible ? "text" : "password"}
+                    placeholder="Sua senha"
                     {...field}
                   />
                 </FormControl>
@@ -87,19 +88,24 @@ const SignInForm = () => {
               </FormItem>
             )}
           />
+          <span className="flex justify-end gap-2  w-full mt-8">
+            <span>{"Revelar a senha"}</span>
+            <Toggle
+              pressed={isPasswordVisible}
+              onPressedChange={() => {
+                setIsPasswordVisible(!isPasswordVisible);
+              }}
+            />
+          </span>
         </div>
-        <Button className="w-full mt-6" type="submit">
-          Sign in
+        <Button className="w-full mt-6" type="submit" variant="pill">
+          Entrar
         </Button>
       </form>
-      <div className="mx-auto my-4 flex w-full items-center justify-evenly before:mr-4 before:block before:h-px before:flex-grow before:bg-stone-400 after:ml-4 after:block after:h-px after:flex-grow after:bg-stone-400">
-        or
-      </div>
-      <GoogleSignInButton>Sign in with Google</GoogleSignInButton>
-      <p className="text-center text-sm text-gray-600 mt-2">
-        If you don&apos;t have an account, please&nbsp;
+      <p className="text-center text-sm text-gray-600 mt-5">
+        {"Se ainda não tiver uma conta "}
         <Link className="text-blue-500 hover:underline" href="/sign-up">
-          Sign up
+          cadastre-se
         </Link>
       </p>
     </Form>
