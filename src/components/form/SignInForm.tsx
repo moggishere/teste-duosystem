@@ -98,7 +98,7 @@ const SignInForm = () => {
             />
           </span>
         </div>
-        <Button className="w-full mt-6" type="submit" variant="pill">
+        <Button className="w-full mt-6" type="submit" format="pill">
           Entrar
         </Button>
       </form>

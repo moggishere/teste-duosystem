@@ -7,6 +7,12 @@ import Link from "next/link";
 export default async function Home() {
   const session = await getServerSession(authOptions);
 
+  console.log(session)
+  
+  if (!session) {
+    return <>none</>
+  }
+
   return (
     <div>
       <h1 className="text-4xl">Home</h1>
