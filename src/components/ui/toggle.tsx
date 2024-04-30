@@ -13,7 +13,7 @@ const Toggle: React.FC<ToggleProps> = (
   ...props
 ) => (
   <T.Root
-    className="flex w-5 h-5 bg-[#FFC29F] border-black border-2 hover:shadow-[2px_2px_0px_rgba(0,0,0,1)] rounded data-[state=on]:bg-[#FF965B]"
+    className="flex w-5 h-5 bg-[#FFC29F] border-black border-2 hover:shadow-[2px_2px_0px_rgba(0,0,0,1)] rounded data-[state=on]:bg-[#FF965B] transition"
     aria-label="Toggle italic"
     pressed={pressed}
     onPressedChange={onPressedChange}

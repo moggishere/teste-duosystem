@@ -3,14 +3,15 @@ import User from "@/components/User";
 import { authOptions } from "@/lib/auth";
 import { getServerSession } from "next-auth";
 import Link from "next/link";
+import { Card } from "@/components/ui/card";
 
 export default async function Home() {
   const session = await getServerSession(authOptions);
 
-  console.log(session)
-  
+  console.log(session);
+
   if (!session) {
-    return <>none</>
+    return <Card variant="default">none</Card>;
   }
 
   return (

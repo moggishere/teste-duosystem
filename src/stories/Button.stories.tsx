@@ -72,7 +72,7 @@ export const Default: Story = {
 export const Destructive: Story = {
   args: { variant: "destructive", format: "rounded" },
   render: function Component(args) {
-    return <ButtonComponent {...args}>Button destrutivo</ButtonComponent>;
+    return <ButtonComponent {...args}>Button destructive</ButtonComponent>;
   },
 };
 
@@ -88,7 +88,9 @@ export const Link: Story = {
   render: function Component(args) {
     return (
       <ButtonComponent {...args}>
-        <a href='javascript:window.location.reload(true)'>Button link  reload page</a>
+        <a href="javascript:window.location.reload(true)">
+          Button link reload page
+        </a>
       </ButtonComponent>
     );
   },
