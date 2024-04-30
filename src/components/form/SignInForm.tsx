@@ -47,8 +47,8 @@ const SignInForm = () => {
       //TODO adicionar toast de error
       console.log(signInData.error);
     } else {
-      router.push("/admin");
-      router.refresh();
+      router.push("/");
+      router.refresh(); // necessario refresh para garantir repopulacao de dados da session
     }
   };
 
@@ -88,7 +88,7 @@ const SignInForm = () => {
               </FormItem>
             )}
           />
-          <span className="flex justify-end gap-2  w-full mt-8">
+          <span className="flex justify-end items-center gap-2 leading-tight w-full mt-8 h-8">
             <span>{"Revelar a senha"}</span>
             <Toggle
               pressed={isPasswordVisible}

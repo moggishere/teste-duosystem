@@ -20,7 +20,7 @@ const Navbar = async () => {
         ) : (
           <Button asChild={true}>
             <Link href="/sign-in">
-              Sign in
+              Entrar
             </Link>
           </Button>
         )}
