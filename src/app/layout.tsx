@@ -20,9 +20,12 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <Provider>
-          <main className="h-screen flex flex-col justify-center items-center">
+          <main
+            // className="h-screen"
+            className="relative h-screen flex flex-col justify-center items-center"
+          >
             <Navbar />
-            {children}
+            <div className='pt-48 pb-20'>{children}</div>
           </main>
         </Provider>
       </body>

@@ -1,6 +1,5 @@
 "use client";
-//TODO adicionar campos faltando ao form
-
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import {
   Form,
@@ -15,8 +14,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import Link from "next/link";
-import GoogleSignInButton from "../GoogleSignInButton";
 import { useRouter } from "next/navigation";
+import { Toggle } from "../ui/toggle";
 
 const FormSchema = z
   .object({
@@ -75,6 +74,8 @@ const SignUpForm = () => {
     }
   };
 
+  const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(false);
+
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="w-full">
@@ -123,6 +124,7 @@ const SignUpForm = () => {
             name="birthday"
             render={({ field }) => (
               <FormItem>
+                <FormLabel>Data de nascimento</FormLabel>
                 <FormControl>
                   <Input
                     type="date"
@@ -147,8 +149,8 @@ const SignUpForm = () => {
                 <FormLabel>Password</FormLabel>
                 <FormControl>
                   <Input
-                    type="password"
-                    placeholder="Enter your password"
+                    type={isPasswordVisible ? "text" : "password"}
+                    placeholder="Adicione sua senha"
                     {...field}
                   />
                 </FormControl>
@@ -161,11 +163,11 @@ const SignUpForm = () => {
             name="confirmPassword"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Re-Enter your password</FormLabel>
+                <FormLabel>Confirmação de senha</FormLabel>
                 <FormControl>
                   <Input
-                    placeholder="Re-Enter your password"
-                    type="password"
+                    placeholder="Readicione sua senha"
+                    type={isPasswordVisible ? "text" : "password"}
                     {...field}
                   />
                 </FormControl>
@@ -173,21 +175,20 @@ const SignUpForm = () => {
               </FormItem>
             )}
           />
+          <span className="flex justify-end gap-2  w-full mt-8">
+            <span>{"Revelar a senha"}</span>
+            <Toggle
+              pressed={isPasswordVisible}
+              onPressedChange={() => {
+                setIsPasswordVisible(!isPasswordVisible);
+              }}
+            />
+          </span>
         </div>
         <Button className="w-full mt-6" type="submit">
           Sign up
         </Button>
       </form>
-      <div className="mx-auto my-4 flex w-full items-center justify-evenly before:mr-4 before:block before:h-px before:flex-grow before:bg-stone-400 after:ml-4 after:block after:h-px after:flex-grow after:bg-stone-400">
-        or
-      </div>
-      <GoogleSignInButton>Sign up with Google</GoogleSignInButton>
-      <p className="text-center text-sm text-gray-600 mt-2">
-        If you don&apos;t have an account, please&nbsp;
-        <Link className="text-blue-500 hover:underline" href="/sign-in">
-          Sign in
-        </Link>
-      </p>
     </Form>
   );
 };

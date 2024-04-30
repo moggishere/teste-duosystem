@@ -13,7 +13,7 @@ const UserAccountnav = () => {
       }}
       variant="destructive"
     >
-      Sign Out
+      Sair
     </Button>
   );
 };
