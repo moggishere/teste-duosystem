@@ -20,7 +20,7 @@ const meta = {
       },
     },
     customColor: {
-      control: { type: "text" },
+      control: { type: "color" },
       description: "Inserção de cor custom do componente Card",
       defaultValue: "#FFFFFF",
       table: {

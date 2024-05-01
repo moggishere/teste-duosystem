@@ -1,5 +1,3 @@
-//TODO tranformar em uma home com boas vindas, mudar comportamento do botao de logout
-
 import React from "react";
 import { authOptions } from "@/lib/auth";
 import { getServerSession } from "next-auth";

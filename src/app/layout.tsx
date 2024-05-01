@@ -18,14 +18,13 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={inter.className + " bg-pink-100"}>
         <Provider>
           <main
-            // className="h-screen"
-            className="relative h-screen flex flex-col justify-center items-center"
+            className="relative flex flex-col justify-start items-center pt-28 pb-20"
           >
             <Navbar />
-            <div className='pt-48 pb-20'>{children}</div>
+            {children}
           </main>
         </Provider>
       </body>

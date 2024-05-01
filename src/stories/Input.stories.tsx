@@ -18,6 +18,14 @@ const meta = {
         type: { summary: "'default' | 'rounded' | 'pill'" },
       },
     },
+    customColor: {
+      control: { type: "color" },
+      description: "Inserção de cor custom do componente Input quando está focado",
+      defaultValue: "#eff5bf",
+      table: {
+        type: { summary: "string" },
+      },
+    },
   },
   tags: ["autodocs"],
 } satisfies Meta<typeof InputComponent>;
