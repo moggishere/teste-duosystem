@@ -9,7 +9,13 @@ const meta = {
   parameters: {
     layout: "centered",
   },
-  argTypes: {},
+  argTypes: {
+    customColor: {
+      control: { type: "color" },
+      description: "Inserção de cor customizável, a cor do Toggle quando `pressed` for `true` sempre será mais escuro",
+      defaultValue: "default",
+    },
+  },
   tags: ["autodocs"],
 } satisfies Meta<typeof ToggleComponent>;
 

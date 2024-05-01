@@ -19,10 +19,10 @@ import { useRouter } from "next/navigation";
 import { Toggle } from "../ui/toggle";
 
 const FormSchema = z.object({
-  email: z.string().min(1, "Email is required").email("Invalid email"),
+  email: z.string().min(1, "Por favor insira email").email("Email inválido"),
   password: z
     .string()
-    .min(1, "Password is required")
+    .min(1, "Por favor insira senha")
     .min(8, "Password must have than 8 characters"),
 });
 
@@ -44,8 +44,8 @@ const SignInForm = () => {
       redirect: false,
     });
     if (signInData?.error) {
-      //TODO adicionar toast de error
       console.log(signInData.error);
+      setIsErrorMessage(true);
     } else {
       router.push("/");
       router.refresh(); // necessario refresh para garantir repopulacao de dados da session
@@ -53,6 +53,7 @@ const SignInForm = () => {
   };
 
   const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(false);
+  const [isErrorMessage, setIsErrorMessage] = useState<boolean>(false);
 
   return (
     <Form {...form}>
@@ -98,6 +99,11 @@ const SignInForm = () => {
             />
           </span>
         </div>
+        {isErrorMessage && (
+          <span className="flex justify-end items-center gap-2 leading-tight w-full mt-8 h-8 text-red-600">
+            <span>{"Dados inválidos ou email não cadastrado"}</span>
+          </span>
+        )}
         <Button className="w-full mt-6" type="submit" format="pill">
           Entrar
         </Button>

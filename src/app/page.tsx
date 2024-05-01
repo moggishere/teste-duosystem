@@ -9,8 +9,6 @@ import { Button } from "@/components/ui/button";
 export default async function Home() {
   const session = await getServerSession(authOptions);
 
-  console.log(session);
-
   if (!session) {
     return (
       <Card variant="default" className="flex flex-col p-8 gap-6">
@@ -23,18 +21,11 @@ export default async function Home() {
   }
 
   return (
-    <div>
+    <Card variant="default" className="flex flex-col p-8 gap-6">
       <h1 className="text-4xl">Home</h1>
-      <Button asChild variant="link" format="pill">
-        <Link href="/admin">
-          Ir para dashboard de adm
-        </Link>
-      </Button>
-
-      <h2>Client Session</h2>
-      <User />
-      <h2>server session</h2>
-      {JSON.stringify(session)}
-    </div>
+      <h3>
+        Seja bem-vindo(a), <strong>{session?.user.username}</strong>!
+      </h3>
+    </Card>
   );
 }
