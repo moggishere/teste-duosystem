@@ -15,7 +15,8 @@ import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import { useRouter } from "next/navigation";
 import { Toggle } from "../ui/toggle";
-import * as T from "@radix-ui/react-toast";
+import Link from "next/link";
+import { Provider as ToastProvider } from "@radix-ui/react-toast";
 
 const FormSchema = z
   .object({
@@ -34,7 +35,7 @@ const FormSchema = z
   })
   .refine((data) => data.password === data.confirmPassword, {
     path: ["confirmPassword"],
-    message: "Password do not match",
+    message: "Senhas incompatíveis",
   });
 
 const SignUpForm = () => {
@@ -67,14 +68,33 @@ const SignUpForm = () => {
     });
 
     if (response.ok) {
-      //TODO exibir página auxiliar antes de fazer push para /sign-in
-      router.push("/sign-in");
+      setIsSignUpSuccessful(true);
     } else {
-      console.error("Falha no cadastro");
+      console.error(response);
+
+      if (response?.status === 409) {
+        setIsErrorMessage(true);
+      }
+      if (response?.status === 500) {
+        setIsErrorMessage(true);
+      }
     }
   };
 
   const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(false);
+  const [isErrorMessage, setIsErrorMessage] = useState<boolean>(false);
+  const [isSignUpSuccessful, setIsSignUpSuccessful] = useState<boolean>(false);
+
+  if (isSignUpSuccessful) {
+    return (
+      <div className="flex flex-col p-8 gap-6">
+        <div>Cadastro realizado com sucesso!</div>
+        <Button asChild variant="link" format="pill">
+          <Link href="/sign-in">Entrar</Link>
+        </Button>
+      </div>
+    );
+  }
 
   return (
     <Form {...form}>
@@ -85,9 +105,9 @@ const SignUpForm = () => {
             name="username"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Apelido</FormLabel>
+                <FormLabel>Nome de usuário</FormLabel>
                 <FormControl>
-                  <Input placeholder="Jorjão" {...field} />
+                  <Input placeholder="jorge123" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -184,9 +204,14 @@ const SignUpForm = () => {
               }}
             />
           </span>
+          {isErrorMessage && (
+            <span className="flex justify-end items-center gap-2 leading-tight w-full mt-8 h-8 text-red-600">
+              <span>{"Email ou apelido já existentes"}</span>
+            </span>
+          )}
         </div>
         <Button className="w-full mt-6" type="submit">
-          Sign up
+          Cadastrar-se
         </Button>
       </form>
     </Form>
