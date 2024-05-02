@@ -1,42 +1,55 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Teste
 
-## TODO
+## Stack
 
-- adicionar instruções de build
-- adicionar instruções de deploy
-- adicionar infos de stack usadas
-- adicionar instruções de .env
-- adicionar deploy
+![Next JS](https://img.shields.io/badge/Next-black?style=for-the-badge&logo=next.js&logoColor=white)
+![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
+![Storybook](https://img.shields.io/badge/-Storybook-FF4785?style=for-the-badge&logo=storybook&logoColor=white)
+![React Hook Form](https://img.shields.io/badge/React%20Hook%20Form-%23EC5990.svg?style=for-the-badge&logo=reacthookform&logoColor=white)
+![Zod](https://img.shields.io/badge/zod-%233068b7.svg?style=for-the-badge&logo=zod&logoColor=white)
 
-## Getting Started
+## Links
 
-First, run the development server:
+Deploy do projeto pode ser acessado em: https://teste-duosystem.vercel.app/
+
+## Como rodar o projeto
+
+Tenha certeza que está na versão correta de Node. Versão recomendada: v20.12.2
+
+O projeto possui .nvmrc então caso tenha nvm disponível basta rodar
+
+```bash
+nvm use
+```
+
+Em seguida instale as dependências do projeto:
+
+```bash
+npm install
+# ou
+yarn install
+# ou
+pnpm install
+```
+
+Configurar arquivo `.env` seguindo a estrutura de `.env.example`. Em seguida ele deve rodar com:
 
 ```bash
 npm run dev
-# or
+# ou
 yarn dev
-# or
+# ou
 pnpm dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Como rodar a documentação dos componentes (Storybook)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Uma vez que as dependências foram instaladas basta rodar
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+```bash
+npm run storybook
+# ou
+yarn storybook
+# ou
+pnpm storybook
+```
