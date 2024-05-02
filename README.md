@@ -12,6 +12,8 @@
 
 Deploy do projeto pode ser acessado em: https://teste-duosystem.vercel.app/
 
+Deploy do Storybook: https://moggishere.github.io/teste-duosystem/
+
 ## Como rodar o projeto
 
 Tenha certeza que está na versão correta de Node. Versão recomendada: v20.12.2
