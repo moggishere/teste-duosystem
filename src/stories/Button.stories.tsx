@@ -56,6 +56,15 @@ const meta = {
         type: { summary: "boolean" },
       },
     },
+    disabled: {
+      control: { type: "boolean" },
+      description:
+        "Controle de disabled de Button",
+      defaultValue: "false",
+      table: {
+        type: { summary: "boolean" },
+      },
+    },
   },
 } satisfies Meta<typeof ButtonComponent>;
 
@@ -102,6 +111,17 @@ export const IconButton: Story = {
     return (
       <ButtonComponent {...args}>
         <Glasses size={16} />
+      </ButtonComponent>
+    );
+  },
+};
+
+export const Disabled: Story = {
+  args: {},
+  render: function Component(args) {
+    return (
+      <ButtonComponent {...args}>
+        Disabled
       </ButtonComponent>
     );
   },

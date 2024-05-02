@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils";
 import { cva, type VariantProps } from "class-variance-authority";
 
 const inputVariants = cva(
-  "flex w-full border-black border-2 p-2.5 focus:outline-none focus:shadow-[2px_2px_0px_rgba(0,0,0,1)] focus:bg-[color:var(--custom-color)] active:shadow-[2px_2px_0px_rgba(0,0,0,1)] ring-offset-white focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-slate-950 focus-visible:ring-offset-2 outline-none transition",
+  "flex w-full border-black border-2 p-2.5 focus:outline-none focus:shadow-[2px_2px_0px_rgba(0,0,0,1)] focus:bg-[color:var(--custom-color)] active:shadow-[2px_2px_0px_rgba(0,0,0,1)] ring-offset-white focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-slate-950 focus-visible:ring-offset-2 outline-none disabled:bg-gray-100 disabled:shadow-none disabled:border-gray-400 disabled:text-gray-400 transition",
   {
     variants: {
       variant: {

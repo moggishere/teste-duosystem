@@ -20,10 +20,19 @@ const meta = {
     },
     customColor: {
       control: { type: "color" },
-      description: "Inserção de cor custom do componente Input quando está focado",
+      description:
+        "Inserção de cor custom do componente Input quando está focado",
       defaultValue: "#eff5bf",
       table: {
         type: { summary: "string" },
+      },
+    },
+    disabled: {
+      control: { type: "boolean" },
+      description: "Controle de disabled de Input",
+      defaultValue: "false",
+      table: {
+        type: { summary: "boolean" },
       },
     },
   },
