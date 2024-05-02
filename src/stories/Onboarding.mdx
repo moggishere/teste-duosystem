@@ -1,9 +1,35 @@
 import { Meta } from "@storybook/blocks";
-import Image from "next/image";
+import { Canvas, Code, Controls } from '@storybook/blocks';
 
+import * as ButtonStories from './Button.stories';
+
+import { Button } from "@/components/ui/button";
 
 <Meta title="Boas vindas" />
 
 # Seja bem-vindo
 
-TODO adicionar infos adicionais na documentação de como customizar os components
+A biblioteca de componentes foi criada usando Radix-UI e Tailwind.
+
+## Customizando seus componentes
+
+Para utilizar um componente apenas é necessário importá-lo diretamente e aplicar os props desejados.
+
+```
+const Button => () {
+  return <Button variant="ghost">Button ghost</Button>;
+}
+```
+
+<Canvas of={ButtonStories.Ghost} />
+
+Caso seja as props oferecidas sejam insuficientes basta inserir estilos Tailwind diretamente por `className` para sobrescrever os estilos existentes como no seguinte exemplo:
+
+
+```
+const Button => () {
+  return <Button size="lg" format="rounded" variant="default" className="bg-green-400 hover:bg-green-500 active:bg-green-700 text-white">Button Button customizado</Button>;
+}
+```
+
+<Canvas of={ButtonStories.OnboardingExample} />

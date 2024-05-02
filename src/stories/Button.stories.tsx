@@ -106,3 +106,18 @@ export const IconButton: Story = {
     );
   },
 };
+
+export const OnboardingExample: Story = {
+  args: { size: "lg", format: "rounded" },
+  render: function Component(args) {
+    return (
+      <ButtonComponent
+        {...args}
+        className="bg-green-400 hover:bg-green-500 active:bg-green-700 text-white"
+      >
+        Button customizado
+      </ButtonComponent>
+    );
+  },
+  tags: ["ignore"],
+};
