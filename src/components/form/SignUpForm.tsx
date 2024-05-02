@@ -13,23 +13,53 @@ import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
-import { useRouter } from "next/navigation";
 import { Toggle } from "../ui/toggle";
 import Link from "next/link";
-import { Provider as ToastProvider } from "@radix-ui/react-toast";
+import { PasswordStrength } from "../PasswordStrength";
 
 const FormSchema = z
   .object({
-    username: z.string().min(1, "Requer usuário").max(100),
-    name: z.string().min(1, "Requer nome").max(100),
-    email: z.string().min(1, "Requer email").email("Invalid email"),
+    username: z
+      .string()
+      .trim()
+      .min(1, "Requer usuário")
+      .max(20, "Máximo de 20 caracteres")
+      .refine((value) => {
+        const nonAlphaNumericRegex = /[^a-zA-Z0-9\s]/;
+        const spaceRegex = /^.*\s{1}.*$/;
+
+        return !nonAlphaNumericRegex.test(value) && !spaceRegex.test(value); // impede entrada de whitespaces no meio do input, se for no comeco ou no fim eles tomam trim
+      }, "Um ou mais caracteres inválidos"),
+    name: z
+      .string()
+      .trim()
+      .min(1, "Requer nome")
+      .max(50)
+      .refine((value) => {
+        const nonAlphaNumericRegex = /[^a-zA-Z0-9\s]/;
+
+        return !nonAlphaNumericRegex.test(value);
+      }, "Um ou mais caracteres inválidos"),
+    email: z.string().trim().min(1, "Requer email").email("Email inválido"),
     password: z
       .string()
+      .trim()
       .min(1, "Requer senha")
       .min(8, "Requer senha com mínimo de 8 caracteres"),
     confirmPassword: z.string().min(1, "Requer senha"),
     birthday: z
       .string()
+      .trim()
+      .refine((value) => {
+        const date = new Date(value);
+        const currentDate = new Date();
+
+        if (date < currentDate) {
+          return true;
+        } else {
+          return false;
+        }
+      }, "Por favor insira uma data válida")
       .refine((value) => !!Date.parse(value))
       .transform((value) => new Date(value)),
   })
@@ -51,7 +81,6 @@ const SignUpForm = () => {
     },
   });
 
-  const router = useRouter();
   const onSubmit = async (values: z.infer<typeof FormSchema>) => {
     const response = await fetch("/api/user", {
       method: "POST",
@@ -107,7 +136,7 @@ const SignUpForm = () => {
               <FormItem>
                 <FormLabel>Nome de usuário</FormLabel>
                 <FormControl>
-                  <Input placeholder="jorge123" {...field} />
+                  <Input autoFocus placeholder="jorge123" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -178,6 +207,7 @@ const SignUpForm = () => {
               </FormItem>
             )}
           />
+          <PasswordStrength input={form.watch("password")} />
           <FormField
             control={form.control}
             name="confirmPassword"
@@ -206,7 +236,7 @@ const SignUpForm = () => {
           </span>
           {isErrorMessage && (
             <span className="flex justify-end items-center gap-2 leading-tight w-full mt-8 h-8 text-red-600">
-              <span>{"Email ou apelido já existentes"}</span>
+              <span>{"Email ou nome de usuário já existentes"}</span>
             </span>
           )}
         </div>
