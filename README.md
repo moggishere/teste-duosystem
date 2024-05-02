@@ -6,6 +6,7 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 - adicionar instruções de deploy
 - adicionar infos de stack usadas
 - adicionar instruções de .env
+- adicionar deploy
 
 ## Getting Started
 
